@@ -9,7 +9,6 @@ def demo():
     model.info()
 
     # accepts all formats - image/dir/Path/URL/video/PIL/ndarray. 0 for webcam
-    results = model.predict(source="0")
     results = model.predict(source="bus.jpg", show=True)  # Display preds. Accepts all YOLO predict arguments
     for result in results:
         print(result.boxes)
