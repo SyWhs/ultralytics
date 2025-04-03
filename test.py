@@ -6,7 +6,7 @@ def demo():
 
     out = model.export(format="engine", imgsz=640, dynamic=True, verbose=False, batch=8, workspace=2, half=True)
 
-    model.info()
+    # model.info()
 
     # accepts all formats - image/dir/Path/URL/video/PIL/ndarray. 0 for webcam
     results = model.predict(source="bus.jpg", show=True)  # Display preds. Accepts all YOLO predict arguments
