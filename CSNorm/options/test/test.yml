@@ -1,0 +1,82 @@
+
+#### general settings
+
+name: test
+use_tb_logger: False
+model: CSNorm
+scale: 2
+gpu_ids: [0]
+
+#### datasets
+
+datasets:
+  val:
+    name: data_val
+    mode: JSH_val
+#    dataroot_gt: './data/example' # path to validation Clean images
+#    dataroot_lq: './data/example' # path to validation Noisy images
+    dataroot_gt: './README' # path to validation Clean images
+    dataroot_lq: './README' # path to validation Noisy images
+
+#### network structures
+
+network_G:
+  which_model_G:
+      subnet_type: Resnet
+  in_nc: 3
+  out_nc: 3
+  block_num: [8, 8]
+  scale: 2
+  init: xavier
+
+
+#### path
+
+path:
+  root: ./
+  pretrain_model_G: ./models/ckpts/NAF_LOL.pth
+  strict_load: true
+  resume_state: ~
+
+
+#### training settings: learning rate scheme, loss
+
+train:
+  lr_G: !!float 1e-4
+  beta1: 0.9
+  beta2: 0.999
+  niter: 600000
+  warmup_iter: -1  # no warm up
+
+  lr_scheme: MultiStepLR
+  lr_steps: [5000, 10000, 15000, 30000, 500000]
+  lr_gamma: 0.5
+
+  pixel_criterion_forw: l2
+  pixel_criterion_back: l1
+  pixel_criterion_hist: l2
+
+  manual_seed: 9
+
+  val_freq: !!float 2000
+
+  vgg16_model:
+
+  lambda_fit_forw: 10
+  lambda_vgg_forw: 0.
+  lambda_structure_forw: 1
+  lambda_orth_forw: 1
+
+  lambda_rec_back: 1
+  lambda_structure_back: 1
+  lambda_orth_back: 1
+
+  weight_decay_G: !!float 1e-8
+  gradient_clipping: 10
+
+
+#### logger
+
+logger:
+  print_freq: 500
+  save_checkpoint_freq: !!float 5000
