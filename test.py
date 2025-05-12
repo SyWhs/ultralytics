@@ -26,8 +26,8 @@ def demo():
 
 if __name__ == "__main__":
 
-    model = YOLO("ultralytics/cfg/models/v8/yolov8.yaml", verbose=True)  # 加载构建yaml自定义模型
+    model = YOLO("yolov8-CSN.yaml", verbose=True)  # 加载构建yaml自定义模型
     # model = YOLO("yolov8n.pt", verbose=True)  # 加载构建预训练模型
 
     # Train the model
-    results = model.train(data="coco8.yaml", epochs=100, imgsz=640) # 训练模型
+    results = model.train(data="BDD100K.yaml", epochs=10, imgsz=640) # 训练模型
