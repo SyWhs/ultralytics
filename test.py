@@ -1,6 +1,7 @@
 import cv2
 from PIL import Image
 from ultralytics import YOLO
+
 def demo():
 
     out = model.export(format="engine", imgsz=640, dynamic=True, verbose=False, batch=8, workspace=2, half=True)
@@ -30,4 +31,4 @@ if __name__ == "__main__":
     # model = YOLO("yolov8n.pt", verbose=True)  # 加载构建预训练模型
 
     # Train the model
-    results = model.train(data="BDD100K.yaml", epochs=10, imgsz=640) # 训练模型
+    results = model.train(data="/home/nrc/MRE/my_yolov8/ultralytics/ultralytics/cfg/datasets/BDD100K.yaml", epochs=100, batch=32, imgsz=640, device=[0, 1, 2, 3]) # 训练模型
