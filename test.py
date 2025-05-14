@@ -34,6 +34,6 @@ if __name__ == "__main__":
     # model = YOLO("yolov8n.pt", verbose=True)  # 加载构建预训练模型
 
     # Train the model
-    # results = model.train(data="myyolov8/ultralytics/ultralytics/cfg/datasets/BDD100K.yaml", epochs=300, batch=512, imgsz=640, device=[0, 1, 2, 3]) # 训练模型
+    # results = model.train(data="myyolov8/ultralytics/ultralytics/cfg/datasets/BDD100K.yaml", epochs=200, batch=512, imgsz=640, device=[0, 1, 2, 3]) # 训练模型
 
     # results = model.train(data="/home/nrc/MRE/my_yolov8/ultralytics/ultralytics/cfg/datasets/coco8.yaml", epochs=10, imgsz=640) # 训练模型
