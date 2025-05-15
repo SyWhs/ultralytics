@@ -27,10 +27,11 @@ def demo():
 
 if __name__ == "__main__":
 
-    # model = YOLO("yolov8-CSN.yaml", verbose=True)  # 加载构建yaml自定义模型
+    model = YOLO("yolov8-CSN.yaml", verbose=True)  # 加载构建yaml自定义模型
 
-    model = YOLO("yolov8.yaml", verbose=True)  # 加载构建yaml自定义模型
+    # model = YOLO("yolov8.yaml", verbose=True)  # 加载构建yaml自定义模型
 
+    print("加载的模型文件：", )
     # model = YOLO("yolov8n.pt", verbose=True)  # 加载构建预训练模型
 
     # Train the model
