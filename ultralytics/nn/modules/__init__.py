@@ -102,6 +102,9 @@ from .transformer import (
     TransformerEncoderLayer,
     TransformerLayer,
 )
+from .CSNorm import (
+    CSNorm,
+)
 
 __all__ = (
     "Conv",

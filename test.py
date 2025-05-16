@@ -39,6 +39,6 @@ if __name__ == "__main__":
     # results = model.train(data="./cfg/datasets/BDD100K.yaml", epochs=200, batch=512, imgsz=640, device=[0, 1, 2, 3]) # 训练模型
 
     results = model.train(data="./cfg/datasets/BDD100K.yaml", 
-                          epochs=10, 
-                          batch=8,
+                          epochs=30, 
+                          batch=16,
                           imgsz=640) # 训练模型
