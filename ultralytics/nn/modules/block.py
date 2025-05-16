@@ -307,6 +307,8 @@ class C2f(nn.Module):
         y = [y[0], y[1]]
         y.extend(m(y[-1]) for m in self.m)
         return self.cv2(torch.cat(y, 1))
+    
+    
 class C3(nn.Module):
     """CSP Bottleneck with 3 convolutions."""
 
