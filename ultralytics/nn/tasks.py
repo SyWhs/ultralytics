@@ -68,7 +68,11 @@ from ultralytics.nn.modules import (
     YOLOEDetect,
     YOLOESegment,
     v10Detect,
-    CSNorm, # 新添加的模块
+)
+# 新添加模块
+from ultralytics.nn.change_modules import (
+    CSNorm,
+    C2f_CGLU,
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -1395,6 +1399,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2fCIB,
             A2C2f,
             CSNorm, # 新添加模块
+            C2f_CGLU,
         }
     )
     repeat_modules = frozenset(  # modules with 'repeat' arguments
@@ -1414,6 +1419,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2fCIB,
             C2PSA,
             A2C2f,
+            C2f_CGLU,
         }
     )
     for i, (f, n, m, args) in enumerate(d["backbone"] + d["head"]):  # from, number, module, args

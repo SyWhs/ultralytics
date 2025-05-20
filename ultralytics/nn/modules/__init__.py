@@ -101,9 +101,6 @@ from .transformer import (
     TransformerEncoderLayer,
     TransformerLayer,
 )
-from .CSNorm import (
-    CSNorm,
-)
 
 __all__ = (
     "Conv",
@@ -182,5 +179,4 @@ __all__ = (
     "TorchVision",
     "Index",
     "A2C2f",
-    "CSNorm", # 新添加的模块
 )

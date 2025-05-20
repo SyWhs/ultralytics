@@ -25,15 +25,7 @@ def demo():
     # from list of PIL/ndarray
     results = model.predict(source=[im1, im2])
 
-if __name__ == "__main__":
-
-    model = YOLO("yolov8-CSN.yaml", verbose=True)  # 加载构建yaml自定义模型
-
-    # model = YOLO("yolov8.yaml", verbose=True)  # 加载构建yaml自定义模型
-
-    # model = YOLO("yolov8n.pt", verbose=True)  # 加载构建预训练模型
-
-    # model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
+def train():
 
     # Train the model
     results = model.train(data="./cfg/datasets/BDD100K.yaml", 
@@ -46,3 +38,30 @@ if __name__ == "__main__":
     #                       epochs=200, 
     #                       batch=512,
     #                       imgsz=640) # 训练模型
+
+def val():
+
+    # Validate the model
+    results = model.val(data="./cfg/datasets/BDD100K.yaml", 
+                        batch=512, 
+                        imgsz=640, 
+                        device=[0, 1, 2, 3]) # 验证模型
+
+    # # results = model.val(data="./cfg/datasets/BDD100K.yaml", 
+    #                     batch=512,
+    #                     imgsz=640) # 验证模型
+
+
+if __name__ == "__main__":
+
+    # model = YOLO("yolov8-CSN.yaml", verbose=True)  # 加载构建yaml自定义模型
+
+    model = YOLO("yolov8-CGLU.yaml", verbose=True)  # 加载构建预训练模型
+    
+    # model = YOLO("yolov8.yaml", verbose=True)  # 加载构建yaml自定义模型
+
+    # model = YOLO("yolov8n.pt", verbose=True)  # 加载构建预训练模型
+
+    # model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
+
+    # train()  # 训练模型
