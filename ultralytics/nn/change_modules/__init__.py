@@ -23,8 +23,13 @@ from .CSNorm import (
 from .CGLU import (
     C2f_CGLU,
 )
-
+from .triplet_attention import (
+    TripletAttention,
+    C2f_TripletAttention,
+)
 __all__ = (
     "CSNorm",
     "C2f_CGLU",
+    "TripletAttention",
+    "C2f_TripletAttention",
 )
