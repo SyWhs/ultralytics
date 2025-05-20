@@ -33,12 +33,16 @@ if __name__ == "__main__":
 
     # model = YOLO("yolov8n.pt", verbose=True)  # 加载构建预训练模型
 
-    model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
+    # model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
 
     # Train the model
-    # results = model.train(data="./cfg/datasets/BDD100K.yaml", epochs=200, batch=512, imgsz=640, device=[0, 1, 2, 3]) # 训练模型
-
     results = model.train(data="./cfg/datasets/BDD100K.yaml", 
-                          epochs=30, 
-                          batch=16,
-                          imgsz=640) # 训练模型
+                          epochs=200, 
+                          batch=512, 
+                          imgsz=640, 
+                          device=[0, 1, 2, 3]) # 训练模型
+
+    # # results = model.train(data="./cfg/datasets/BDD100K.yaml", 
+    #                       epochs=200, 
+    #                       batch=512,
+    #                       imgsz=640) # 训练模型
