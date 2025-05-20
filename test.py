@@ -44,11 +44,13 @@ if __name__ == "__main__":
 
     # model = YOLO("yolov8-CSN.yaml", verbose=True)  # 加载构建yaml自定义模型
 
-    model = YOLO("yolov8-CGLU.yaml", verbose=True)  # 加载构建预训练模型
+    # model = YOLO("yolov8-CGLU.yaml", verbose=True)  # 加载构建预训练模型
 
-    model = YOLO("yolov8-C2f_TripletAttention.yaml", verbose=True)  # 加载构建预训练模型
+    # model = YOLO("yolov8-C2f_TripletAttention.yaml", verbose=True)  # 加载构建预训练模型
 
-    model = YOLO("/home/nrc505/myyolov8/ultralytics/runs/detect/train-yolov8-e200/weights/best.pt", verbose=True)  # 加载构建预训练模型
+    model = YOLO("yolov8-TripletAttention.yaml", verbose=True)  # 加载构建预训练模型
+
+    # model = YOLO("/home/nrc505/myyolov8/ultralytics/runs/detect/train-yolov8-e200/weights/best.pt", verbose=True)  # 加载构建预训练模型
 
     # model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
 
