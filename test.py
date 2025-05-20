@@ -9,22 +9,6 @@ def demo():
     model.info()  # 打印模型信息
     model.summary()  # 打印模型结构
 
-    # accepts all formats - image/dir/Path/URL/video/PIL/ndarray. 0 for webcam
-    results = model.predict(source="bus.jpg", show=True)  # Display preds. Accepts all YOLO predict arguments
-    for result in results:
-        print(result.boxes)
-
-    # from PIL
-    im1 = Image.open("bus.jpg")
-    results = model.predict(source=im1, save=True)  # save plotted images
-
-    # from ndarray
-    im2 = cv2.imread("bus.jpg")
-    results = model.predict(source=im2, save=True, save_txt=True)  # save predictions as labels
-
-    # from list of PIL/ndarray
-    results = model.predict(source=[im1, im2])
-
 def train():
 
     # Train the model
@@ -34,10 +18,6 @@ def train():
                           imgsz=640, 
                           device=[0, 1, 2, 3]) # 训练模型
 
-    # # results = model.train(data="./cfg/datasets/BDD100K.yaml", 
-    #                       epochs=200, 
-    #                       batch=512,
-    #                       imgsz=640) # 训练模型
 
 def val():
 
@@ -47,9 +27,17 @@ def val():
                         imgsz=640, 
                         device=[0, 1, 2, 3]) # 验证模型
 
-    # # results = model.val(data="./cfg/datasets/BDD100K.yaml", 
-    #                     batch=512,
-    #                     imgsz=640) # 验证模型
+
+def predict():
+
+    # Predict with the model
+    results = model.predict(source="/home/nrc505/myyolov8/cabc30fc-e7726578.jpg", 
+                            conf=0.25, 
+                            iou=0.45, 
+                            save=True, 
+                            save_txt=True, 
+                            show=True,
+                            visualize=True), # 预测模型
 
 
 if __name__ == "__main__":
@@ -57,11 +45,17 @@ if __name__ == "__main__":
     # model = YOLO("yolov8-CSN.yaml", verbose=True)  # 加载构建yaml自定义模型
 
     model = YOLO("yolov8-CGLU.yaml", verbose=True)  # 加载构建预训练模型
+
+    model = YOLO("yolov8-C2f_TripletAttention.yaml", verbose=True)  # 加载构建预训练模型
     
     # model = YOLO("yolov8.yaml", verbose=True)  # 加载构建yaml自定义模型
 
-    # model = YOLO("yolov8n.pt", verbose=True)  # 加载构建预训练模型
+    model = YOLO("/home/nrc505/myyolov8/ultralytics/runs/detect/train-yolov8-e200/weights/best.pt", verbose=True)  # 加载构建预训练模型
 
     # model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
 
     # train()  # 训练模型
+
+    # val()  # 验证模型
+    
+    # predict()  # 预测模型
