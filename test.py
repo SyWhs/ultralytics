@@ -29,6 +29,8 @@ def train():
 
     # Train the model
     results = model.train(data="./cfg/datasets/BDD100K.yaml", 
+                          name="train-yolov8-CGLU-e200",
+                          project="ultralytics/runs/detect",
                           epochs=200, 
                           batch=512, 
                           imgsz=640, 
@@ -64,4 +66,4 @@ if __name__ == "__main__":
 
     # model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
 
-    # train()  # 训练模型
+    train()  # 训练模型
