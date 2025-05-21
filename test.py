@@ -13,7 +13,7 @@ def train():
 
     # Train the model
     results = model.train(data="./cfg/datasets/BDD100K.yaml", 
-                          name="train-yolov8-CGLU-e200",
+                          name="train-yolov8-C2f_TripletAttention-e200",
                           project="ultralytics/runs/detect",
                           epochs=200, 
                           batch=512, 
