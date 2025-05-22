@@ -1,0 +1,15 @@
+YOLOv8-CGLU summary: 123 layers, 3,065,498 parameters, 0 gradients, 8.3 GFLOPs
+val: Scanning /home/nrc505/myyolov8/datasets/bdd100k/labels/val.cache... 10000 images, 0 backgrounds, 0 corrupt: 100%|██████████| 10000/10000 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 625/625 [01:23<00:00,  7.45it/s]
+                   all      10000     185578      0.664      0.331      0.508       0.32
+                   bus       1242       1597      0.713      0.405      0.587      0.493
+         traffic light       5653      26891      0.748      0.384      0.569      0.249
+          traffic sign       8221      34915      0.819      0.379      0.607      0.373
+                person       3220      13265      0.785      0.384      0.598      0.333
+                  bike        578       1007      0.633      0.255       0.45       0.24
+                 truck       2689       4247      0.648      0.463       0.58      0.464
+                 motor        334        452      0.745      0.168      0.452      0.254
+                   car       9879     102540      0.861      0.618      0.766      0.543
+                 train         14         15          0          0          0          0
+                 rider        515        649      0.689      0.253      0.477      0.251
+Speed: 0.2ms preprocess, 4.5ms inference, 0.0ms loss, 0.6ms postprocess per image
