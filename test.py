@@ -13,12 +13,13 @@ def train():
 
     # Train the model
     results = model.train(data="./cfg/datasets/BDD100K.yaml", 
-                          name="train-yolov8-TripletAttention-e200",
+                          name="train-yolov8-CBAM-e200",
                           project="ultralytics/runs/detect",
                           epochs=200, 
                           batch=512, 
                           imgsz=640, 
-                          device=[0, 1, 2, 3]) # 训练模型
+                          device=[0, 1, 2, 3],
+                          resume=True) # 训练模型
 
 
 def val():
@@ -57,12 +58,14 @@ if __name__ == "__main__":
 
     # model = YOLO("yolov8-TripletAttention.yaml", verbose=True)  # 加载构建预训练模型
 
-    model = YOLO("/home/nrc505/myyolov8/ultralytics/runs/detect/train-yolov8-e300/weights/best.pt", verbose=True)  # 加载构建预训练模型
+    #model = YOLO("yolov8-CBAM.yaml", verbose=True)  # 加载构建预训练模型
+    model = YOLO('/home/nrc/MRE/myyolov8/ultralytics/runs/detect/train-yolov8-CBAM-e200/weights/last.pt')
+    # model = YOLO("/home/nrc505/myyolov8/ultralytics/runs/detect/train-yolov8-e300/weights/best.pt", verbose=True)  # 加载构建预训练模型
 
     # model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
 
-    # train()  # 训练模型
+    train()  # 训练模型
 
-    val()  # 验证模型
+    # val()  # 验证模型
     
     # predict()  # 预测模型

@@ -68,6 +68,7 @@ from ultralytics.nn.modules import (
     YOLOEDetect,
     YOLOESegment,
     v10Detect,
+    CBAM, # 新添加模块
 )
 # 新添加模块
 from ultralytics.nn.change_modules import (
@@ -1494,6 +1495,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         # 新增模块
         elif m is TripletAttention:
             args=[]
+        elif m is CBAM:
+            c1, c2 = ch[f], args[0]
+            if c2 != nc:  # if c2 not equal to number of classes (i.e. for Classify() output)
+                c2 = make_divisible(min(c2, max_channels) * width, 8)
+            args = [c1,  *args[1:]]
         elif m in frozenset({TorchVision, Index}):
             c2 = args[0]
             c1 = ch[f]
