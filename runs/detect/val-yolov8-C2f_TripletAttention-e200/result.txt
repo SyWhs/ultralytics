@@ -1,0 +1,15 @@
+YOLOv8-C2f_TripletAttention summary: 106 layers, 2,815,858 parameters, 0 gradients, 7.8 GFLOPs
+val: Scanning /home/nrc505/myyolov8/datasets/bdd100k/labels/val.cache... 10000 images, 0 backgrounds, 0 corrupt: 
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 625/62
+                   all      10000     185578      0.668       0.33      0.511      0.324
+                   bus       1242       1597      0.673      0.434      0.591      0.503
+         traffic light       5653      26891      0.745      0.391      0.573      0.251
+          traffic sign       8221      34915      0.805      0.398      0.611      0.374
+                person       3220      13265      0.822      0.356      0.599      0.337
+                  bike        578       1007      0.614      0.235       0.43      0.234
+                 truck       2689       4247      0.671      0.469      0.594      0.476
+                 motor        334        452      0.753      0.162      0.451      0.252
+                   car       9879     102540      0.868      0.615      0.766      0.544
+                 train         14         15          0          0          0          0
+                 rider        515        649      0.725      0.243      0.492      0.269
+Speed: 0.2ms preprocess, 4.2ms inference, 0.0ms loss, 0.6ms postprocess per image

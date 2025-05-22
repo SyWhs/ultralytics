@@ -1,0 +1,15 @@
+YOLOv8-CSN summary (fused): 72 layers, 3,007,598 parameters, 0 gradients, 8.1 GFLOPs
+val: Scanning /home/nrc505/myyolov8/datasets/bdd100k/labels/val.cache... 10000 images, 0 backgrounds, 0 corrupt: 100%|██████████| 10000/10000 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 625/625 [01:20<00:00,  7.78it/s]
+                   all      10000     185578       0.67      0.343      0.519      0.331
+                   bus       1242       1597      0.703      0.438      0.603      0.509
+         traffic light       5653      26891      0.739      0.405      0.576      0.252
+          traffic sign       8221      34915        0.8      0.404      0.612      0.376
+                person       3220      13265      0.823      0.364      0.603      0.344
+                  bike        578       1007      0.627      0.265      0.461      0.261
+                 truck       2689       4247        0.7      0.469      0.607      0.487
+                 motor        334        452      0.754      0.197       0.47      0.266
+                   car       9879     102540      0.858      0.629      0.771      0.546
+                 train         14         15          0          0          0          0
+                 rider        515        649        0.7      0.256      0.489      0.273
+Speed: 0.2ms preprocess, 4.0ms inference, 0.0ms loss, 0.6ms postprocess per image
