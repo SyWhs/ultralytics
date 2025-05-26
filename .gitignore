@@ -1,6 +1,3 @@
-# 新添加规则
-# test.py
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -32,6 +29,8 @@ MANIFEST
 requirements.txt
 setup.py
 ultralytics.egg-info
+main.py
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
