@@ -1,0 +1,15 @@
+YOLOv8-CBAM summary (fused): 77 layers, 3,073,488 parameters, 0 gradients, 8.1 GFLOPs
+val: Scanning /home/nrc505/myyolov8/datasets/bdd100k/labels/val.cache... 10000 images, 0 backgrounds, 0 corrupt: 100%|████████
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 625/625 [01:18<00:0
+                   all      10000     185578      0.659      0.347      0.517      0.328
+                   bus       1242       1597      0.707      0.436      0.602       0.51
+         traffic light       5653      26891       0.76      0.392       0.58      0.256
+          traffic sign       8221      34915      0.809        0.4      0.614      0.378
+                person       3220      13265      0.818      0.376      0.608      0.343
+                  bike        578       1007      0.609      0.263      0.452      0.249
+                 truck       2689       4247      0.671      0.477        0.6      0.479
+                 motor        334        452      0.716      0.212      0.467      0.252
+                   car       9879     102540       0.85      0.637      0.773      0.545
+                 train         14         15          0          0          0          0
+                 rider        515        649      0.648      0.273      0.474      0.264
+Speed: 0.2ms preprocess, 4.0ms inference, 0.0ms loss, 0.6ms postprocess per image
