@@ -1,3 +1,6 @@
+# 新添加规则
+# test.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

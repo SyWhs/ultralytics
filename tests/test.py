@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
     # model.load("ultralytics/runs/detect/train-yolov8-e200/weights/best.pt")  # 加载预训练模型
 
-    train()  # 训练模型
+    # train()  # 训练模型
 
     # val()  # 验证模型
     
