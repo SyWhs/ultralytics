@@ -2,8 +2,8 @@ import os
 import cv2
 
 if __name__ == '__main__':
-    dataDir = "/home/nrc/MRE/myyolov8/datasets/ExDark/images/val"
-    saveDir = "/home/nrc/MRE/myyolov8/datasets/ExDark/images/val1"
+    dataDir = "/home/nrc505/myyolov8/datasets/ExDark/images/test"
+    saveDir = "/home/nrc505/myyolov8/datasets/ExDark/images/test1"
     
     if not os.path.exists(saveDir):
         os.makedirs(saveDir)
