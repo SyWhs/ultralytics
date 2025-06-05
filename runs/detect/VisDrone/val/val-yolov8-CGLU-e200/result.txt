@@ -1,0 +1,16 @@
+YOLOv8-CGLU summary: 123 layers, 3,065,498 parameters, 0 gradients, 8.3 GFLOPs
+val: Fast image access ✅ (ping: 0.0±0.0 ms, read: 5919.0±975.5 MB/s, size: 159.3 KB)
+val: Scanning /home/nrc505/myyolov8/datasets/VisDrone/VisDrone2019-DET-val/labels.cache... 548 images, 0 backgrounds, 0 corrupt: 100%|██████████| 548/548 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 35/35 [00:13<00:00,  2.69it/s]
+                   all        548      38759      0.548      0.286      0.422      0.273
+            pedestrian        520       8844      0.609      0.294      0.466       0.23
+                people        482       5125      0.652      0.185      0.415      0.181
+               bicycle        364       1287      0.267     0.0723      0.157     0.0757
+                   car        515      14064      0.761      0.716      0.783      0.578
+                   van        421       1975      0.525      0.345      0.441      0.345
+                 truck        266        750      0.594      0.261      0.435      0.329
+              tricycle        337       1045      0.491      0.189      0.324      0.208
+       awning-tricycle        220        532      0.314      0.103      0.187      0.137
+                   bus        131        251      0.665       0.41      0.572      0.431
+                 motor        485       4886      0.605      0.283      0.438      0.219
+Speed: 0.3ms preprocess, 4.7ms inference, 0.0ms loss, 11.7ms postprocess per image
