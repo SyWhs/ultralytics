@@ -244,6 +244,9 @@ class BaseValidator:
                     *tuple(self.speed.values())
                 )
             )
+            LOGGER.info(f'FPS(Whole process):{(1000 / sum(self.speed.values())): .2f}')
+
+            LOGGER.info(f'FPS(inference):{1000 / tuple(self.speed.values())[1]:.2f}')
             if self.args.save_json and self.jdict:
                 with open(str(self.save_dir / "predictions.json"), "w", encoding="utf-8") as f:
                     LOGGER.info(f"Saving {f.name}...")
