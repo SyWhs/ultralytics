@@ -1,0 +1,19 @@
+YOLOv8-TripletAttention summary (fused): 81 layers, 3,007,898 parameters, 0 gradients, 8.1 GFLOPs
+val: Fast image access ✅ (ping: 0.0±0.0 ms, read: 5678.5±1435.1 MB/s, size: 148.8 KB)
+val: Scanning /home/nrc505/myyolov8/datasets/VisDrone/VisDrone2019-DET-val/labels.cache... 548 images, 0 backgrounds, 0 corrupt: 100%|██████████| 548/548 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):   3%|▎         | 1/35 [00:01<00:34,  1.00s/it]WARNING ⚠️ NMS time limit 2.800s exceeded
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 35/35 [00:13<00:00,  2.60it/s]
+                   all        548      38759      0.553      0.279      0.419      0.266
+            pedestrian        520       8844      0.592      0.285      0.452      0.222
+                people        482       5125      0.686      0.175      0.427      0.186
+               bicycle        364       1287      0.324     0.0684      0.188     0.0829
+                   car        515      14064      0.767        0.7      0.775      0.569
+                   van        421       1975      0.526      0.328       0.43      0.327
+                 truck        266        750      0.537      0.232      0.386      0.287
+              tricycle        337       1045      0.511      0.197      0.332      0.206
+       awning-tricycle        220        532      0.312      0.111      0.185      0.139
+                   bus        131        251      0.648       0.41      0.566      0.419
+                 motor        485       4886      0.628      0.281      0.452      0.219
+Speed: 0.3ms preprocess, 4.4ms inference, 0.0ms loss, 12.7ms postprocess per image
+FPS(Whole process): 57.48
+FPS(inference):225.20
