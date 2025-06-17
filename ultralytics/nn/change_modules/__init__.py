@@ -27,9 +27,13 @@ from .triplet_attention import (
     TripletAttention,
     C2f_TripletAttention,
 )
+from .RetinexFormer_arch import (
+    RetinexFormer,
+)
 __all__ = (
     "CSNorm",
     "C2f_CGLU",
     "TripletAttention",
     "C2f_TripletAttention",
+    "RetinexFormer",
 )

@@ -76,6 +76,7 @@ from ultralytics.nn.change_modules import (
     C2f_CGLU,
     TripletAttention,
     C2f_TripletAttention,
+    RetinexFormer,
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, YAML, colorstr, emojis
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -1743,6 +1744,11 @@ def parse_model(d, ch, verbose=True):
             if c2 != nc:  # if c2 not equal to number of classes (i.e. for Classify() output)
                 c2 = make_divisible(min(c2, max_channels) * width, 8)
             args = [c1,  *args[1:]]
+        elif m is RetinexFormer:
+            c1 = ch[f]
+            c2 = args[0]
+            args = [c1, c2, *args[1:]]
+        #
         elif m in frozenset({TorchVision, Index}):
             c2 = args[0]
             c1 = ch[f]
