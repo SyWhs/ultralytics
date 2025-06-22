@@ -173,9 +173,9 @@ class IG_MSA(nn.Module):
         x = attn @ v   # b,heads,d,hw
         x = x.permute(0, 3, 1, 2)    # Transpose
         x = x.reshape(b, h * w, self.num_heads * self.dim_head)
-        out_c = self.proj(x).view(b, h, w, c)
+        out_c = self.proj(x).view(b, h, w, c).contiguous()
         out_p = self.pos_emb(v_inp.reshape(b, h, w, c).permute(
-            0, 3, 1, 2)).permute(0, 2, 3, 1)
+            0, 3, 1, 2)).permute(0, 2, 3, 1).contiguous()
         out = out_c + out_p
 
         return out
@@ -199,7 +199,7 @@ class FeedForward(nn.Module):
         return out: [b,h,w,c]
         """
         out = self.net(x.permute(0, 3, 1, 2).contiguous())
-        return out.permute(0, 2, 3, 1)
+        return out.permute(0, 2, 3, 1).contiguous()
 
 
 class IGAB(nn.Module):
@@ -228,7 +228,7 @@ class IGAB(nn.Module):
         for (attn, ff) in self.blocks:
             x = attn(x, illu_fea_trans=illu_fea.permute(0, 2, 3, 1)) + x
             x = ff(x) + x
-        out = x.permute(0, 3, 1, 2)
+        out = x.permute(0, 3, 1, 2).contiguous()
         return out
 
 
@@ -343,7 +343,7 @@ class RetinexFormer_Single_Stage(nn.Module):
 
 
 class RetinexFormer(nn.Module):
-    def __init__(self, in_channels=3, out_channels=3, n_feat=31, stage=3, num_blocks=[1,1,1]):
+    def __init__(self, in_channels=3, out_channels=3, n_feat=40, stage=1, num_blocks=[1,2,2]):
         super(RetinexFormer, self).__init__()
         self.stage = stage
 
@@ -362,12 +362,16 @@ class RetinexFormer(nn.Module):
         return out
 
 
-# if __name__ == '__main__':
-#     from fvcore.nn import FlopCountAnalysis
-#     model = RetinexFormer(stage=1,n_feat=40,num_blocks=[1,2,2]).cuda()
-#     print(model)
-#     inputs = torch.randn((1, 3, 256, 256)).cuda()
-#     flops = FlopCountAnalysis(model,inputs)
-#     n_param = sum([p.nelement() for p in model.parameters()])  # 所有参数数量
-#     print(f'GMac:{flops.total()/(1024*1024*1024)}')
-#     print(f'Params:{n_param}')
+if __name__ == '__main__':
+    # from fvcore.nn import FlopCountAnalysis
+    model = RetinexFormer(stage=1,n_feat=40,num_blocks=[1,2,2]).cuda()
+    print(model)
+    inputs = torch.randn((2, 3, 256, 256)).cuda()
+    out=model(inputs)
+    # flops = FlopCountAnalysis(model,inputs)
+    # n_param = sum([p.nelement() for p in model.parameters()])  # 所有参数数量
+    # print(f'GMac:{flops.total()/(1024*1024*1024)}')
+    # print(f'Params:{n_param}')
+    print(out.shape)
+    print("Retinex output: min={}, max={}, mean={}, std={}".format(
+        out.min(), out.max(), out.mean(), out.std()))   
