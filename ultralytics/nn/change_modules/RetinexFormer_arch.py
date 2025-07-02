@@ -153,32 +153,32 @@ class IG_MSA(nn.Module):
         return out: [b,h,w,c]
         """
         b, h, w, c = x_in.shape
-        x = x_in.reshape(b, h * w, c)
+        x = x_in.reshape(b, h * w, c).contiguous()
         q_inp = self.to_q(x)
         k_inp = self.to_k(x)
         v_inp = self.to_v(x)
         illu_attn = illu_fea_trans # illu_fea: b,c,h,w -> b,h,w,c
-        q, k, v, illu_attn = map(lambda t: rearrange(t, 'b n (h d) -> b h n d', h=self.num_heads),
+        q, k, v, illu_attn = map(lambda t: rearrange(t, 'b n (h d) -> b h n d', h=self.num_heads).contiguous(),
                                  (q_inp, k_inp, v_inp, illu_attn.flatten(1, 2)))
         v = v * illu_attn
         # q: b,heads,hw,c
-        q = q.transpose(-2, -1)
-        k = k.transpose(-2, -1)
-        v = v.transpose(-2, -1)
+        q = q.transpose(-2, -1).contiguous()
+        k = k.transpose(-2, -1).contiguous()
+        v = v.transpose(-2, -1).contiguous()
         q = F.normalize(q, dim=-1, p=2)
         k = F.normalize(k, dim=-1, p=2)
-        attn = (k @ q.transpose(-2, -1))   # A = K^T*Q
+        attn = (k @ q.transpose(-2, -1).contiguous())   # A = K^T*Q
         attn = attn * self.rescale
         attn = attn.softmax(dim=-1)
         x = attn @ v   # b,heads,d,hw
-        x = x.permute(0, 3, 1, 2)    # Transpose
-        x = x.reshape(b, h * w, self.num_heads * self.dim_head)
+        x = x.permute(0, 3, 1, 2).contiguous()    # Transpose
+        x = x.reshape(b, h * w, self.num_heads * self.dim_head).contiguous()
         out_c = self.proj(x).view(b, h, w, c).contiguous()
         out_p = self.pos_emb(v_inp.reshape(b, h, w, c).permute(
             0, 3, 1, 2)).permute(0, 2, 3, 1).contiguous()
         out = out_c + out_p
 
-        return out
+        return out.contiguous()  # [b,h,w,c]
 
 
 class FeedForward(nn.Module):
@@ -199,7 +199,7 @@ class FeedForward(nn.Module):
         return out: [b,h,w,c]
         """
         out = self.net(x.permute(0, 3, 1, 2).contiguous())
-        return out.permute(0, 2, 3, 1).contiguous()
+        return out.permute(0, 2, 3, 1).contiguous()  # [b,h,w,c]
 
 
 class IGAB(nn.Module):
@@ -224,16 +224,16 @@ class IGAB(nn.Module):
         illu_fea: [b,c,h,w]
         return out: [b,c,h,w]
         """
-        x = x.permute(0, 2, 3, 1)
+        x = x.permute(0, 2, 3, 1).contiguous()
         for (attn, ff) in self.blocks:
-            x = attn(x, illu_fea_trans=illu_fea.permute(0, 2, 3, 1)) + x
+            x = attn(x, illu_fea_trans=illu_fea.permute(0, 2, 3, 1).contiguous()) + x
             x = ff(x) + x
         out = x.permute(0, 3, 1, 2).contiguous()
         return out
 
 
 class Denoiser(nn.Module):
-    def __init__(self, in_dim=3, out_dim=3, dim=31, level=2, num_blocks=[2, 4, 4]):
+    def __init__(self, in_dim=3, out_dim=3, dim=40, level=2, num_blocks=[1, 2, 2]):
         super(Denoiser, self).__init__()
         self.dim = dim
         self.level = level
@@ -324,7 +324,7 @@ class Denoiser(nn.Module):
 
 
 class RetinexFormer_Single_Stage(nn.Module):
-    def __init__(self, in_channels=3, out_channels=3, n_feat=31, level=2, num_blocks=[1, 1, 1]):
+    def __init__(self, in_channels=3, out_channels=3, n_feat=40, level=2, num_blocks=[1, 2, 2]):
         super(RetinexFormer_Single_Stage, self).__init__()
         self.estimator = Illumination_Estimator(n_feat)
         self.denoiser = Denoiser(in_dim=in_channels,out_dim=out_channels,dim=n_feat,level=level,num_blocks=num_blocks)  #### 将 Denoiser 改为 img2img
@@ -362,16 +362,16 @@ class RetinexFormer(nn.Module):
         return out
 
 
-if __name__ == '__main__':
-    # from fvcore.nn import FlopCountAnalysis
-    model = RetinexFormer(stage=1,n_feat=40,num_blocks=[1,2,2]).cuda()
-    print(model)
-    inputs = torch.randn((2, 3, 256, 256)).cuda()
-    out=model(inputs)
-    # flops = FlopCountAnalysis(model,inputs)
-    # n_param = sum([p.nelement() for p in model.parameters()])  # 所有参数数量
-    # print(f'GMac:{flops.total()/(1024*1024*1024)}')
-    # print(f'Params:{n_param}')
-    print(out.shape)
-    print("Retinex output: min={}, max={}, mean={}, std={}".format(
-        out.min(), out.max(), out.mean(), out.std()))   
+# if __name__ == '__main__':
+#     # from fvcore.nn import FlopCountAnalysis
+#     model = RetinexFormer(stage=1,n_feat=40,num_blocks=[1,2,2]).cuda()
+#     print(model)
+#     inputs = torch.randn((2, 3, 256, 256)).cuda()
+#     out=model(inputs)
+#     # flops = FlopCountAnalysis(model,inputs)
+#     # n_param = sum([p.nelement() for p in model.parameters()])  # 所有参数数量
+#     # print(f'GMac:{flops.total()/(1024*1024*1024)}')
+#     # print(f'Params:{n_param}')
+#     print(out.shape)
+#     print("Retinex output: min={}, max={}, mean={}, std={}".format(
+#         out.min(), out.max(), out.mean(), out.std()))   
